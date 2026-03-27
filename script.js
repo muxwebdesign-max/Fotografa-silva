@@ -68,8 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     galleryItems.forEach(item => {
         item.addEventListener('click', (e) => {
-            e.preventDefault();
             const href = item.getAttribute('href');
+            if (href && href.includes('instagram.com')) return; // Allow normal link behavior for IG links
+            
+            e.preventDefault();
             lightboxImg.src = href;
             lightbox.classList.add('active');
         });
@@ -120,6 +122,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.style = ''; // Reset inline styles
                 }, 4000);
             }, 1000);
+        });
+    }
+
+    // Portfolio Mobile View More
+    const viewMoreBtn = document.getElementById('view-more-btn');
+    const portfolioGallery = document.getElementById('portfolio-gallery');
+
+    if (viewMoreBtn && portfolioGallery) {
+        viewMoreBtn.addEventListener('click', () => {
+            const isCollapsed = portfolioGallery.classList.contains('collapsed');
+            
+            if (isCollapsed) {
+                portfolioGallery.classList.remove('collapsed');
+                viewMoreBtn.innerHTML = 'Ocultar portafolio <i class="bi bi-chevron-up" style="margin-left: 0.5rem;"></i>';
+                
+                // Trigger intersection observer for newly visible items (or just make them visible)
+                const hiddenItems = portfolioGallery.querySelectorAll('.gallery-item:nth-child(n+3)');
+                hiddenItems.forEach(item => {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, 50);
+                });
+                
+            } else {
+                portfolioGallery.classList.add('collapsed');
+                viewMoreBtn.innerHTML = 'Abrir portafolio <i class="bi bi-chevron-down" style="margin-left: 0.5rem;"></i>';
+                
+                // Scroll back to top of gallery smoothly
+                const offsetTop = portfolioGallery.parentElement.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         });
     }
 

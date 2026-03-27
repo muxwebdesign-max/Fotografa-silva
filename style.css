@@ -170,7 +170,12 @@ a { color: inherit; text-decoration: none; transition: var(--transition); }
     .split-layout { gap: 2rem; }
 }
 
+.view-more-container { display: none; }
+
 @media (max-width: 768px) {
+    .gallery-grid.collapsed .gallery-item:nth-child(n+3) { display: none; }
+    .view-more-container { display: block; }
+    
     .mobile-menu-btn { display: block; }
     .nav-links { position: fixed; top: 70px; left: 0; width: 100%; background-color: var(--color-cream); flex-direction: column; padding: 2rem; box-shadow: 0 10px 15px rgba(0,0,0,0.05); gap: 1.5rem; transform: translateY(-150%); transition: transform 0.3s ease; z-index: 999; }
     .nav-links.active { transform: translateY(0); }
