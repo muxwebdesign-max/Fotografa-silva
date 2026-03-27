@@ -108,6 +108,7 @@ a { color: inherit; text-decoration: none; transition: var(--transition); }
 .section-subtitle { font-size: 1.25rem; color: var(--color-text-muted); font-weight: 300; }
 
 .about-image { flex: 1; }
+.about-image img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center; border-radius: var(--radius); }
 .about-text { flex: 1; }
 
 .service-card { background-color: var(--color-white); padding: 2.5rem; border-radius: var(--radius); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: var(--transition); }
